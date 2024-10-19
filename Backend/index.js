@@ -23,29 +23,31 @@ const result=await user.create({
 userIds.push(result._id);
 
 }}
-const generateDate=()=>{
+const generateTime=()=>{
+    const lengthMinutes = Math.floor(Math.random() * 5) + 1
+    const timeSpentMinutes = Math.floor(Math.random() * (lengthMinutes + 1)); // Up to length minutes
+    const timeSpentSeconds = Math.floor(Math.random() * 60); // Random seconds
+    const timeSpentTotalSeconds = timeSpentMinutes * 60 + timeSpentSeconds;
+     return `${timeSpentMinutes}:${timeSpentSeconds < 10 ? '0' : ''}${timeSpentSeconds}`
+}
+const generatelength=()=>{
     const lengthMinutes = Math.floor(Math.random() * 5) + 1; // Length between 1 and 5 minutes
     const lengthSeconds = Math.floor(Math.random() * 60); // Length seconds
     const lengthTotalSeconds = lengthMinutes * 60 + lengthSeconds;
 
-    const timeSpentMinutes = Math.floor(Math.random() * (lengthMinutes + 1)); // Up to length minutes
-    const timeSpentSeconds = Math.floor(Math.random() * 60); // Random seconds
-    const timeSpentTotalSeconds = timeSpentMinutes * 60 + timeSpentSeconds;
+    
+        return  `${lengthMinutes}:${lengthSeconds < 10 ? '0' : ''}${lengthSeconds}`
+        
+    }
 
-    return {
-        length: `${lengthMinutes}:${lengthSeconds < 10 ? '0' : ''}${lengthSeconds}`,
-        timeSpent: `${timeSpentMinutes}:${timeSpentSeconds < 10 ? '0' : ''}${timeSpentSeconds}`,
-        lengthTotalSeconds,
-        timeSpentTotalSeconds,
-    };
 
-}
 const populateSongs=async()=>{
     for(i=0;i<20;i++){
 const songName=faker.music.songName();
 const artistName=faker.music.artist();
 const Genre=faker.music.genre();
-const {length,Timespent}=generateDate();
+const Timespent=generateTime();
+const length=generatelength();
 const  randomuserId=userIds[Math.floor(Math.random() * userIds.length)];
 const date=faker.date.recent();
 
@@ -55,7 +57,8 @@ songName,
 artistName,
 Genre,
 Timespent,
-Date:date
+Date:date,
+Length:length
 })
  }
 }
