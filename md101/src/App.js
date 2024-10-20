@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
@@ -6,6 +5,7 @@ import { BrowserRouter,Routes ,Route} from 'react-router-dom';
 import Nav from "./component/Nav"
 import Form from "./component/Form"
 import Dashboard from "./component/Dashboard"
+import Login from "./component/Login"
 const socket = io('http://localhost:5000'); // Connect to the backend WebSocket server
 
 function App() {
@@ -48,6 +48,7 @@ function App() {
   <Routes>
   <Route path='/' element={<Dashboard data={data} playlist={playlist}/>}/>
   <Route path='/form' element={<Form addEvent={addEvent}/>}/>
+  <Route path='/login' element={<Login/>}/>
    </Routes>
    
     </BrowserRouter>
